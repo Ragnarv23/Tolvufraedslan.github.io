@@ -1,0 +1,59 @@
+.course-banner img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;  /* Ensures the entire image fits while maintaining aspect ratio */
+    margin: 0 auto;
+    display: block;
+}
+
+.course-detail-container {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 900px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.course-header h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.course-header p {
+    text-align: center;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.course-info {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-top: 20px;
+}
+
+.course-price {
+    font-size: 1.5em;
+    color: #003366;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.button {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background: #003366;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+
+.button:hover {
+    background-color: #005b8d;
+}

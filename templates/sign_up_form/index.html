@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}Tölvufræðslan Akureyri | Umsókn um námskeið{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sign_up_form/styles.css') }}">
+
+<div class="container">
+    <h2>Umsókn um námskeið</h2>
+
+    <form method="POST" action="{{ url_for('course_routes.register', courseid=course.courseid) }}">
+        <input type="hidden" name="courseid" value="{{ courseid }}">
+
+        <!-- Name Field -->
+        <div class="form-group">
+            <label for="name">Nafn*</label>
+            <input type="text" id="name" name="name" required class="form-control" placeholder="Sláðu inn fullt nafn">
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-group">
+            <label for="email">Tölvupóstur*</label>
+            <input type="email" id="email" name="email" required class="form-control" placeholder="Sláðu inn tölvupóstinn þinn">
+        </div>
+
+        <!-- Phone Field -->
+        <div class="form-group">
+            <label for="phone">Sími</label>
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Sláðu inn símanúmerið þitt">
+        </div>
+
+        <!-- Kennitala Field -->
+        <div class="form-group">
+            <label for="kennitala">Kennitala*</label>
+            <input type="text" id="kennitala" name="kennitala" required class="form-control" placeholder="Sláðu inn kennitölu (Íslensk ID)">
+        </div>
+
+        <!-- Gender Field -->
+        <div class="form-group">
+            <label for="gender">Kyn</label>
+            <select id="gender" name="gender" class="form-control">
+                <option value="">Veldu kyn</option>
+                <option value="male">Karl</option>
+                <option value="female">Kona</option>
+                <option value="other">Annað</option>
+            </select>
+        </div>
+
+        <!-- Different Payer Checkbox -->
+        <div class="form-group">
+            <label for="differentpayer">Greiðandi er annar?</label>
+            <input type="checkbox" id="differentpayer" name="differentpayer" class="form-control">
+        </div>
+
+        <!-- Payer Kennitala Field (appears if "Different Payer" is checked) -->
+        <div class="form-group" id="payer-kennitala-group" style="display:none;">
+            <label for="payerkennitala">Kennitala greiðanda</label>
+            <input type="text" id="payerkennitala" name="payerkennitala" class="form-control" placeholder="Sláðu inn kennitölu greiðanda (ef hún er önnur)">
+        </div>
+
+        <!-- Payer Name Field (appears if "Different Payer" is checked) -->
+        <div class="form-group" id="payer-name-group" style="display:none;">
+            <label for="payername">Nafn greiðanda</label>
+            <input type="text" id="payername" name="payername" class="form-control" placeholder="Sláðu inn nafn greiðanda">
+        </div>
+
+        <!-- Payer Phone Field (appears if "Different Payer" is checked) -->
+        <div class="form-group" id="payer-phone-group" style="display:none;">
+            <label for="payerphone">Sími greiðanda</label>
+            <input type="tel" id="payerphone" name="payerphone" class="form-control" placeholder="Sláðu inn símanúmer greiðanda">
+        </div>
+
+        <button type="submit" class="button">Senda umsókn</button>
+    </form>
+</div>
+
+<script>
+    // Show/hide payer input fields based on the checkbox
+    document.getElementById('differentpayer').addEventListener('change', function() {
+        var payerKennitalaGroup = document.getElementById('payer-kennitala-group');
+        var payerNameGroup = document.getElementById('payer-name-group');
+        var payerPhoneGroup = document.getElementById('payer-phone-group');
+
+        if (this.checked) {
+            payerKennitalaGroup.style.display = 'block';
+            payerNameGroup.style.display = 'block';
+            payerPhoneGroup.style.display = 'block';
+        } else {
+            payerKennitalaGroup.style.display = 'none';
+            payerNameGroup.style.display = 'none';
+            payerPhoneGroup.style.display = 'none';
+        }
+    });
+</script>
+
+{% endblock %}

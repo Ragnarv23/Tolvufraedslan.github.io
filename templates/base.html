@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tölvufræðslan á Akureyri</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/styles.css') }}">
+    
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <!-- Now this will work correctly and navigate to the homepage -->
+            <a href="{{ url_for('course_routes.index') }}">
+                <img src="{{ url_for('static', filename='images/logo4.png') }}" alt="Tölvufræðslan Logo">
+            </a>
+        </div>
+    </header>
+    <main>
+        <!-- Flash messages will go here -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}
+
+        {% endblock %}
+    </main>
+    <footer>
+        Tölvufræðslan Akureyri | Sími: 462-7899 | Netfang: tf@tf.is | KT: 681288-1399 | Banki: 0302-26-27080
+    </footer>
+</body>
+</html>

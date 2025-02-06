@@ -1,0 +1,17 @@
+header { background: #ffffff; color: #000; padding: 20px 0; text-align: left; }
+
+footer {
+    background: #003366;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+footer p {
+    margin: 0;
+    font-size: 1.1em;
+}
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+

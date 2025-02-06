@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Create a Course{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create_course/create_course.css') }}">
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<div class="container">
+    <h2>Create a New Course</h2>
+    <form method="POST">
+        <label for="name">Course Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="short_description">Short Description:</label>
+        <input type="text" id="short_description" name="short_description">
+
+        <label for="description">Full Description:</label>
+        <div id="editor"></div>
+        <input type="hidden" id="description" name="description">
+
+        <label for="startdate">Start Date:</label>
+        <input type="date" id="startdate" name="startdate" required>
+
+        <label for="price">Price (ISK):</label>
+        <input type="number" id="price" name="price" required>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location">
+
+        <label for="image_url">Course Image URL:</label>
+        <input type="text" id="image_url" name="image_url">
+
+        <button type="submit">Create Course</button>
+    </form>
+</div>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script>
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+
+    document.querySelector('form').onsubmit = function() {
+        document.querySelector('#description').value = quill.root.innerHTML;
+    };
+    
+    document.querySelector('form').addEventListener('submit', function (event) {
+    var description = document.querySelector('#description');
+    description.value = quill.root.innerHTML; 
+});
+</script>
+{% endblock %}

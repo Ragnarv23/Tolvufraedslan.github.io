@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+header {
+    background: #003366;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+.form-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.form-group textarea {
+    resize: vertical;
+}
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.button {
+    padding: 10px 20px;
+    background: #003366;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+.checkbox-container {
+    margin-left: 10px;
+}
+footer {
+    background-color: #003366;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    margin-top: 30px;
+}
