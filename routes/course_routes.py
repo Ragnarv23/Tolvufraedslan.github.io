@@ -2,10 +2,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from datetime import datetime
 from models.models import db, Course, RegisteredStudent
 
-# Create a single blueprint for both course creation and course detail
 course_routes = Blueprint('course_routes', __name__)
 
-# Route for creating a new course
 @course_routes.route('/create-course', methods=['GET', 'POST'])
 def create_course():
     if request.method == 'POST':
@@ -17,7 +15,6 @@ def create_course():
         location = request.form['location']
         image_url = request.form.get('image_url', None)
 
-        # Create a new course instance
         new_course = Course(
             name=name,
             description=description,
@@ -30,15 +27,12 @@ def create_course():
         db.session.add(new_course)
         db.session.commit()
 
-        # Redirect to the newly created course's detail page
         return redirect(url_for('course_routes.course_detail', courseid=new_course.courseid))
 
     return render_template('create_course/create_course.html')
 
-# Route for displaying the course details
 @course_routes.route('/course/<int:courseid>', methods=['GET'])
 def course_detail(courseid):
-    # Fetch the course by ID
     course = Course.query.get(courseid)
     if course:
         return render_template('course_details/index.html', course=course)
@@ -51,23 +45,20 @@ def register(courseid):
 
     if course:
         if request.method == 'POST':
-            # Retrieve form data
             name = request.form.get('name')
             email = request.form.get('email')
             phone = request.form.get('phone')
             kennitala = request.form.get('kennitala')
             gender = request.form.get('gender')
-            differentpayer = request.form.get('differentpayer') == 'on'  # Check if checkbox is checked
+            differentpayer = request.form.get('differentpayer') == 'on'  
             payerkennitala = request.form.get('payerkennitala') if differentpayer else None
             payername = request.form.get('payername') if differentpayer else None
             payerphone = request.form.get('payerphone') if differentpayer else None
 
-            # Validate required fields
             if not name or not email or not kennitala:
                 flash('Please fill in all required fields.', 'error')
                 return redirect(url_for('course_routes.register', courseid=courseid))
 
-            # Add registration logic: Insert into your registrations table
             new_registration = RegisteredStudent(
                 courseid=courseid,
                 name=name,
@@ -84,7 +75,6 @@ def register(courseid):
             db.session.add(new_registration)
             db.session.commit()
 
-            # Redirect to course detail with a success message
             flash('Registration successful!', 'success')
             return redirect(url_for('course_routes.course_detail', courseid=courseid))
 
