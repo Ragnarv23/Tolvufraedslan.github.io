@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_mail import Mail, Message
+from app import mail
 from datetime import datetime
 from models.models import db, Course, RegisteredStudent
 
@@ -76,6 +78,23 @@ def register(courseid):
             
             db.session.add(new_registration)
             db.session.commit()
+
+            msg = Message("Course Registration Confirmation",
+                          recipients=[email])  
+            msg.body = f"Hello {name},\n\nThank you for registering for the course: {course.name}.\n\nBest regards,\nYour Course Team"
+            try:
+                mail.send(msg)
+            except Exception as e:
+                flash(f"Error sending email: {e}", 'error')
+
+            company_email = "tf@tf.is"  
+            company_msg = Message("New Course Registration",
+                                  recipients=[company_email])  
+            company_msg.body = f"A new student has registered for the course: {course.name} \n price: {course.price}.\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nPayment Method: {payment_method}"
+            try:
+                mail.send(company_msg)
+            except Exception as e:
+                flash(f"Error sending email to company: {e}", 'error')
 
             flash('Registration successful!', 'success')
             return redirect(url_for('course_routes.course_detail', courseid=courseid))

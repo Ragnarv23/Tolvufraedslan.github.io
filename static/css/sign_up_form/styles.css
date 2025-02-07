@@ -9,12 +9,6 @@ body {
     margin: auto;
     overflow: hidden;
 }
-header {
-    background: #003366;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-}
 .form-container {
     background: #fff;
     padding: 20px;
