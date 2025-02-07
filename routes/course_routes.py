@@ -54,6 +54,7 @@ def register(courseid):
             payerkennitala = request.form.get('payerkennitala') if differentpayer else None
             payername = request.form.get('payername') if differentpayer else None
             payerphone = request.form.get('payerphone') if differentpayer else None
+            payment_method=request.form.get('paymentMethod')
 
             if not name or not email or not kennitala:
                 flash('Please fill in all required fields.', 'error')
@@ -69,7 +70,8 @@ def register(courseid):
                 differentpayer=differentpayer,
                 payerkennitala=payerkennitala,
                 payername=payername,
-                payerphone=payerphone
+                payerphone=payerphone,
+                payment_method=payment_method
             )
             
             db.session.add(new_registration)

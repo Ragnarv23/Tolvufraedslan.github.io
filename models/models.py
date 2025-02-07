@@ -33,7 +33,8 @@ class RegisteredStudent(db.Model):
     payerkennitala = db.Column(db.String(10), nullable=True)
     payername = db.Column(db.String(255), nullable=True)
     payerphone = db.Column(db.String(50), nullable=True)
-
+    payment_method = db.Column(db.String(50), nullable=False)
+    
     courseid = db.Column(db.Integer, db.ForeignKey('courses.courseid'), nullable=False)
     
     def __repr__(self):
