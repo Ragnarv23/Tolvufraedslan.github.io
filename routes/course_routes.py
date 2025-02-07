@@ -87,7 +87,7 @@ def register(courseid):
             except Exception as e:
                 flash(f"Error sending email: {e}", 'error')
 
-            company_email = "tf@tf.is"  
+            company_email = "ragnaraudun@gmail.com"  
             company_msg = Message("New Course Registration",
                                   recipients=[company_email])  
             company_msg.body = f"A new student has registered for the course: {course.name} \n price: {course.price}.\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nPayment Method: {payment_method}"

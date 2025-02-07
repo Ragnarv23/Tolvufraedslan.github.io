@@ -17,9 +17,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAIL_SERVER'] = 'smtp.office365.com'  
 app.config['MAIL_PORT'] = 587  
 app.config['MAIL_USE_TLS'] = True 
-app.config['MAIL_USERNAME'] = 'tf@tf.is' 
-app.config['MAIL_PASSWORD'] = 'your-email-password'  
-app.config['MAIL_DEFAULT_SENDER'] = 'tf@tf.is'  
+app.config['MAIL_USERNAME'] = 'audun@tf.is' 
+app.config['MAIL_PASSWORD'] = 'G@man123'  
+app.config['MAIL_DEFAULT_SENDER'] = 'audun@tf.is'  
 
 mail.init_app(app) 
 
