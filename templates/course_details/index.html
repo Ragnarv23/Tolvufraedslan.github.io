@@ -7,7 +7,9 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/course_details/styles.css') }}">
 
 <div class="course-banner">
+    <div class="blue-overlay"></div> <!-- New blue overlay -->
     <img src="{{ course.image_url or url_for('static', filename='images/default-course.png') }}" alt="{{ course.name }} Image">
+    <h1 class="banner-title">{{ course.name }}</h1> <!-- Course Title Overlay -->
 </div>
 
 <div class="course-detail-container">
