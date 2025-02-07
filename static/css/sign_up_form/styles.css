@@ -61,7 +61,15 @@ header {
     border: none;
 }
 .checkbox-container {
-    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align checkboxes to the left */
+    margin-left: 0; /* Reset the left margin to align with the container */
+    padding-left: 10px; /* Add optional padding if you want some space from the left edge */
+}
+
+.checkbox-container input {
+    margin-bottom: 10px; /* Adds space between checkboxes */
 }
 footer {
     background-color: #003366;
