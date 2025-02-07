@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_mail import Mail, Message
-from app import mail
+from extensions import mail  
 from datetime import datetime
 from models.models import db, Course, RegisteredStudent
 
