@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_migrate import Migrate
 from models.models import db, Course
 import os
 from routes.course_routes import course_routes 
@@ -17,6 +18,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 db.init_app(app)
+migrate = Migrate(app, db)
 
 app.register_blueprint(course_routes)
 
