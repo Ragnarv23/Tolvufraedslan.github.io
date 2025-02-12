@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Course - {{ course.name }}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/course_edit/styles.css') }}">
+
+<div class="course-detail-container">
+    <h1>Edit Course: {{ course.name }}</h1>
+
+    <form action="{{ url_for('course_routes.edit_course', courseid=course.courseid) }}" method="POST">
+        <label for="name">Course Name:</label>
+        <input type="text" id="name" name="name" value="{{ course.name }}" required>
+
+        <label for="short_description">Short Description:</label>
+        <input type="text" id="short_description" name="short_description" value="{{ course.short_description }}" required>
+
+        <label for="description">Full Description:</label>
+        <textarea id="description" name="description" required>{{ course.description }}</textarea>
+
+        <label for="price">Price (ISK):</label>
+        <input type="number" id="price" name="price" value="{{ course.price }}" required>
+
+        <label for="image_url">Image URL:</label>
+        <input type="text" id="image_url" name="image_url" value="{{ course.image_url }}">
+
+        <button type="submit" class="button">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

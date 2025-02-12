@@ -108,3 +108,20 @@ def register(courseid):
 def index():
     courses = Course.query.all() 
     return render_template('course_list/index.html', courses=courses)
+
+@course_routes.route('/edit-course/<int:courseid>', methods=['GET', 'POST'])
+def edit_course(courseid):
+    course = Course.query.get_or_404(courseid)
+
+    if request.method == 'POST':
+        course.name = request.form['name']
+        course.short_description = request.form['short_description']
+        course.description = request.form['description']
+        course.price = request.form['price']
+        course.image_url = request.form.get('image_url', course.image_url)
+
+        db.session.commit()
+        flash('Course updated successfully!', 'success')
+        return redirect(url_for('course_routes.course_detail', courseid=courseid))
+
+    return render_template('course_edit/index.html', course=course)
