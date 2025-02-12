@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Edit Course - {{ course.name }}{% endblock %}
+{% block title %}Edit: {{ course.name }}{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/course_edit/styles.css') }}">
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
 <div class="course-detail-container">
     <h1>Edit Course: {{ course.name }}</h1>
@@ -16,9 +17,10 @@
         <input type="text" id="short_description" name="short_description" value="{{ course.short_description }}" required>
 
         <label for="description">Full Description:</label>
-        <textarea id="description" name="description" required>{{ course.description }}</textarea>
+        <div id="editor">{{ course.description|safe }}</div>
+        <input type="hidden" id="description" name="description">
 
-        <label for="price">Price (ISK):</label>
+        <label for="price">Price:</label>
         <input type="number" id="price" name="price" value="{{ course.price }}" required>
 
         <label for="image_url">Image URL:</label>
@@ -27,4 +29,17 @@
         <button type="submit" class="button">Save Changes</button>
     </form>
 </div>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script>
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+
+    quill.root.innerHTML = `{{ course.description|safe }}`;
+
+    document.querySelector('form').onsubmit = function() {
+        document.querySelector('#description').value = quill.root.innerHTML;
+    };
+</script>
 {% endblock %}
