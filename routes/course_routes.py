@@ -79,9 +79,29 @@ def register(courseid):
             db.session.add(new_registration)
             db.session.commit()
 
-            msg = Message("Course Registration Confirmation",
+            msg = Message("Takk fyrir að skrá þig á námskeiðið {course.name}",
                           recipients=[email])  
-            msg.body = f"Hello {name},\n\nThank you for registering for the course: {course.name}.\n\nBest regards,\nYour Course Team"
+            msg.body = f"""
+                    Takk fyrir að skrá þig á námskeiðið {course.name}
+
+                    Við munum á næstu dögum senda þér greiðsluseðil fyrir námskeiðinu.
+
+                    Einnig er hægt að millifæra á okkur og spara þannig seðilgjald:
+
+                    kt. 681288-1399  
+                    banki 0302  
+                    höfuðbók 26  
+                    reikningur 27080  
+
+                    Upphæð: {course.price} ISK
+
+                    Hlökkum til að sjá þig.
+
+                    Starfsfólk Tölvufræðslunnar  
+                    www.tf.s  
+                    tf@tf.is  
+                    462-7899
+                    """
             try:
                 mail.send(msg)
             except Exception as e:
@@ -96,8 +116,8 @@ def register(courseid):
             except Exception as e:
                 flash(f"Error sending email to company: {e}", 'error')
 
-            flash('Registration successful!', 'success')
-            return redirect(url_for('course_routes.course_detail', courseid=courseid))
+            flash('Skráning tókst!', 'success')
+            return redirect(url_for('course_routes.index'))
 
         return render_template('sign_up_form/index.html', course=course)
 
