@@ -93,7 +93,7 @@ def register(courseid):
                     höfuðbók 26  
                     reikningur 27080  
 
-                    Upphæð: {course.price} ISK
+                    Upphæð: {int(course.price)} 
 
                     Hlökkum til að sjá þig.
 

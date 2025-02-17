@@ -23,7 +23,7 @@
     </div>
 
     <div class="course-price">
-        <p><strong>Verð: </strong>{{ course.price }} ISK</p>
+        <p><strong>Verð: </strong>{{ int(course.price) }}</p>
     </div>
     
     <a href="{{ url_for('course_routes.register', courseid=course.courseid) }}" class="button">Skrá mig</a>
