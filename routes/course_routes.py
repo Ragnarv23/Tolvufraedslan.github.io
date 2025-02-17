@@ -79,7 +79,7 @@ def register(courseid):
             db.session.add(new_registration)
             db.session.commit()
 
-            msg = Message("Takk fyrir að skrá þig á námskeiðið {course.name}",
+            msg = Message("Takk fyrir að skrá þig á námskeiðið okkar!",
                           recipients=[email])  
             msg.body = f"""
                     Takk fyrir að skrá þig á námskeiðið {course.name}
@@ -137,7 +137,7 @@ def edit_course(courseid):
         course.name = request.form['name']
         course.short_description = request.form['short_description']
         course.description = request.form['description']
-        course.price = int(request.form['price'])
+        course.price = request.form['price']
         course.image_url = request.form.get('image_url', course.image_url)
 
         db.session.commit()

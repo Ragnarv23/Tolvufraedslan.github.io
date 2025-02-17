@@ -10,7 +10,7 @@ class Course(db.Model):
     description = db.Column(db.Text, nullable=False)
     short_description = db.Column(db.String(255), nullable=True)  
     startdate = db.Column(db.Date, nullable=False)
-    price = db.Column(db.Float, nullable=False)
+    price = db.Column(db.Integer, nullable=False)
     location = db.Column(db.String(255), nullable=True)
     visibility = db.Column(db.Boolean, default=True, nullable=False)
     image_url = db.Column(db.String(255), nullable=True)  
