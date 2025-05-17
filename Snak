@@ -1,0 +1,98 @@
+@echo off
+setlocal enabledelayedexpansion
+
+:: Game Settings
+set "width=20"
+set "height=10"
+set "snake=10,5"
+set "dir=RIGHT"
+set "food="
+
+:: Helper functions
+:draw
+cls
+for /L %%y in (1,1,%height%) do (
+    for /L %%x in (1,1,%width%) do (
+        set "char= "
+        for %%S in (!snake!) do (
+            for /f "tokens=1,2 delims=," %%a in ("%%S") do (
+                if %%a==%%x if %%b==%%y set "char=O"
+            )
+        )
+        if "!food!"=="%%x,%%y" set "char=*"
+        <nul set /p="!char!"
+    )
+    echo.
+)
+goto :eof
+
+:spawn_food
+set /a "fx=%random%%%width+1"
+set /a "fy=%random%%%height+1"
+set "food=%fx%,%fy%"
+goto :eof
+
+:input
+choice /c WASD /n /t 1 /d !
+if errorlevel 4 set dir=RIGHT
+if errorlevel 3 set dir=DOWN
+if errorlevel 2 set dir=UP
+if errorlevel 1 set dir=LEFT
+goto :eof
+
+:: Game Start
+call :spawn_food
+
+:game_loop
+call :input
+
+:: Get snake head
+for %%S in (%snake%) do set "head=%%S" & goto :got_head
+:got_head
+for /f "tokens=1,2 delims=," %%a in ("%head%") do (
+    set /a "x=%%a"
+    set /a "y=%%b"
+)
+
+:: Update head position
+if "%dir%"=="LEFT" set /a x-=1
+if "%dir%"=="RIGHT" set /a x+=1
+if "%dir%"=="UP" set /a y-=1
+if "%dir%"=="DOWN" set /a y+=1
+
+:: Check boundaries
+if %x% lss 1 goto :game_over
+if %y% lss 1 goto :game_over
+if %x% gtr %width% goto :game_over
+if %y% gtr %height% goto :game_over
+
+:: Add new head
+set "newhead=%x%,%y%"
+set "snake=%newhead% %snake%"
+
+:: Check food
+if "%food%"=="%newhead%" (
+    call :spawn_food
+) else (
+    :: Remove tail
+    set "temp="
+    for %%S in (%snake%) do (
+        if defined first (
+            set "temp=!temp! %%S"
+        ) else (
+            set first=1
+        )
+    )
+    set "snake=!temp!"
+    set "first="
+)
+
+:: Redraw
+call :draw
+goto :game_loop
+
+:game_over
+cls
+echo Game Over!
+pause
+exit /b
